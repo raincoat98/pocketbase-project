@@ -1,0 +1,17 @@
+services:
+  pocketbase:
+    build:
+      context: .
+      dockerfile: ./pocketbase/Dockerfile
+    container_name: pocketbase-prod
+    ports:
+      - "8890:8890"
+    volumes:
+      - ./pocketbase/pb_data:/pb/pb_data
+    networks:
+      - prod-network
+    restart: unless-stopped
+
+networks:
+  prod-network:
+    external: true
