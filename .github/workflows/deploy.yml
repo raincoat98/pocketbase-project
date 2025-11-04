@@ -107,11 +107,11 @@ jobs:
           max_attempts=5
           attempt=1
           while [ $attempt -le $max_attempts ]; do
-            if sshpass -p "${{ secrets.SYNOLOGY_PASSWORD }}" ssh -T -p $SSH_PORT ${{ secrets.SYNOLOGY_USERNAME }}@${{ secrets.SYNOLOGY_HOST }} << 'EOSSH'
+            if sshpass -p ${{ secrets.SYNOLOGY_PASSWORD }} ssh -T -p $SSH_PORT ${{ secrets.SYNOLOGY_USERNAME }}@${{ secrets.SYNOLOGY_HOST }} << 'EOSSH'
               echo "🔄 PocketBase 배포 스크립트 실행 시작..."
 
               # 루트 권한으로 스크립트 실행
-              echo "${{ secrets.SYNOLOGY_PASSWORD }}" | sudo -S bash -c '
+              echo ${{ secrets.SYNOLOGY_PASSWORD }} | sudo -S bash -c '
               cd "${{ secrets.DEPLOY_PATH }}"
 
               # Docker가 설치되어 있는지 확인
