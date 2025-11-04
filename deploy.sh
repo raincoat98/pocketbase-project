@@ -56,6 +56,13 @@ main() {
     # 작업 디렉토리 이동
     cd "$SCRIPT_DIR"
     
+    # pb_data 디렉토리 생성 (없으면 마운트 실패)
+    if [ ! -d "pocketbase/pb_data" ]; then
+        echo -e "${YELLOW}pocketbase/pb_data 디렉토리 생성 중...${NC}"
+        mkdir -p pocketbase/pb_data
+        chmod 755 pocketbase/pb_data
+    fi
+    
     # PocketBase 빌드 및 시작 (프론트엔드 포함)
     echo -e "${YELLOW}PocketBase 빌드 중... (프론트엔드 포함)${NC}"
     docker-compose -f docker-compose.prod.yml build pocketbase
